@@ -1,6 +1,6 @@
 package com.ontariotechu.sofe3980u;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
