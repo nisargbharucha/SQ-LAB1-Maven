@@ -86,40 +86,24 @@ public class Binary {
 	}
 
 	/**
-	 * Perform OR logic operation with another binary variable.
+	 * Perform OR logic operation with two binary variables.
 	 *
-	 * @param num The binary variable to perform OR with.
-	 * @return A binary variable with a value of OR operation between two binary
+	 * @param binary1 The first binary variable.
+	 * @param binary2 The second binary variable.
+	 * @return A binary variable with a value of OR operation between the two binary
 	 *         numbers.
 	 */
-	public Binary or(Binary num) {
-		int len1 = this.number.length();
-		int len2 = num.number.length();
+	public static Binary or(Binary binary1, Binary binary2) {
+		int len1 = binary1.number.length();
+		int len2 = binary2.number.length();
 
 		StringBuilder result = new StringBuilder();
 
 		for (int i = 0; i < Math.max(len1, len2); i++) {
-			char digit1;
-			if (i < len1) {
-				digit1 = this.number.charAt(len1 - 1 - i);
-			} else {
-				digit1 = '0';
-			}
-			char digit2;
+			char digit1 = (i < len1) ? binary1.number.charAt(len1 - 1 - i) : '0';
+			char digit2 = (i < len2) ? binary2.number.charAt(len2 - 1 - i) : '0';
 
-			if (i < len2) {
-				digit2 = num.number.charAt(len2 - 1 - i);
-			} else {
-				digit2 = '0';
-			}
-
-			char orResult;
-
-			if (digit1 == '1' || digit2 == '1') {
-				orResult = '1';
-			} else {
-				orResult = '0';
-			}
+			char orResult = (digit1 == '1' || digit2 == '1') ? '1' : '0';
 			result.insert(0, orResult);
 		}
 
@@ -127,41 +111,25 @@ public class Binary {
 	}
 
 	/**
-	 * Perform AND logical operation with another binary variable.
+	 * Perform AND logical operation with two binary variables.
 	 *
-	 * @param num The binary variable to perform AND with.
-	 * @return A binary variable with a value of AND operation between two binary
+	 * @param binary1 The first binary variable.
+	 * @param binary2 The second binary variable.
+	 * @return A binary variable with a value of AND operation between the two
+	 *         binary
 	 *         numbers.
 	 */
-	public Binary and(Binary num) {
-		int len1 = this.number.length();
-		int len2 = num.number.length();
-		int maxLen = Math.max(len1, len2);
+	public static Binary and(Binary binary1, Binary binary2) {
+		int len1 = binary1.number.length();
+		int len2 = binary2.number.length();
 
 		StringBuilder result = new StringBuilder();
 
 		for (int i = 0; i < Math.max(len1, len2); i++) {
-			char digit1;
-			if (i < len1) {
-				digit1 = this.number.charAt(len1 - 1 - i);
-			} else {
-				digit1 = '0';
-			}
-			char digit2;
+			char digit1 = (i < len1) ? binary1.number.charAt(len1 - 1 - i) : '0';
+			char digit2 = (i < len2) ? binary2.number.charAt(len2 - 1 - i) : '0';
 
-			if (i < len2) {
-				digit2 = num.number.charAt(len2 - 1 - i);
-			} else {
-				digit2 = '0';
-			}
-
-			char andResult;
-
-			if (digit1 == '1' && digit2 == '1') {
-				andResult = '1';
-			} else {
-				andResult = '0';
-			}
+			char andResult = (digit1 == '1' && digit2 == '1') ? '1' : '0';
 			result.insert(0, andResult);
 		}
 
@@ -171,17 +139,18 @@ public class Binary {
 	/**
 	 * Multiply two binary variables.
 	 *
-	 * @param num The binary variable to multiply with.
-	 * @return A binary variable with a value of product of two binary numbers.
+	 * @param binary1 The first binary variable.
+	 * @param binary2 The second binary variable.
+	 * @return A binary variable with a value of product of the two binary numbers.
 	 */
-	public Binary multiply(Binary num) {
+	public static Binary multiply(Binary binary1, Binary binary2) {
 		Binary result = new Binary("0");
 
-		for (int i = 0; i < num.number.length(); i++) {
-			char currentDigit = num.number.charAt(num.number.length() - 1 - i);
+		for (int i = 0; i < binary2.number.length(); i++) {
+			char currentDigit = binary2.number.charAt(binary2.number.length() - 1 - i);
 
 			if (currentDigit == '1') {
-				Binary partialProduct = new Binary(this.number);
+				Binary partialProduct = new Binary(binary1.number);
 				for (int j = 0; j < i; j++) {
 					partialProduct = Binary.add(partialProduct, partialProduct);
 				}
