@@ -132,6 +132,30 @@ public class BinaryTest {
     }
 
     /**
+     * Test OR operation with two binary numbers, both being zeros.
+     */
+    @Test
+    public void testOrOperationZeros() {
+        Binary binary1 = new Binary("1000100");
+        Binary binary2 = new Binary("0");
+
+        Binary resultOr = Binary.or(binary1, binary2);
+        assertEquals("1000100", resultOr.getValue());
+    }
+
+    /**
+     * Test OR operation with two binary numbers having different bits set to 1.
+     */
+    @Test
+    public void testOrOperationDifferentBits() {
+        Binary binary1 = new Binary("10101010");
+        Binary binary2 = new Binary("01010101");
+
+        Binary resultOr = Binary.or(binary1, binary2);
+        assertEquals("11111111", resultOr.getValue());
+    }
+
+    /**
      * Test The and functions with two binary numbers of the same length
      */
     @Test
@@ -141,6 +165,30 @@ public class BinaryTest {
 
         Binary resultAnd = Binary.and(binary3, binary4);
         assertEquals("1000", resultAnd.getValue());
+    }
+
+    /**
+     * Test AND operation with two binary numbers, one having trailing zeros.
+     */
+    @Test
+    public void testAndOperationTrailingZeros() {
+        Binary binary1 = new Binary("10001000");
+        Binary binary2 = new Binary("11100000");
+
+        Binary resultAnd = Binary.and(binary1, binary2);
+        assertEquals("10000000", resultAnd.getValue());
+    }
+
+    /**
+     * Test AND operation with one binary number having all ones.
+     */
+    @Test
+    public void testAndOperationAllOnes() {
+        Binary binary1 = new Binary("10001000");
+        Binary binary2 = new Binary("11111111");
+
+        Binary resultAnd = Binary.and(binary1, binary2);
+        assertEquals("10001000", resultAnd.getValue());
     }
 
     /**
@@ -154,4 +202,29 @@ public class BinaryTest {
         Binary resultMultiply = Binary.multiply(binary5, binary6);
         assertEquals("1110111000000", resultMultiply.getValue());
     }
+
+    /**
+     * Test Multiply with binary number multiplied by zero.
+     */
+    @Test
+    public void testMultiplyByZero() {
+        Binary binary1 = new Binary("11011011");
+        Binary binary2 = new Binary("0");
+
+        Binary resultMultiply = Binary.multiply(binary1, binary2);
+        assertEquals("", resultMultiply.getValue());
+    }
+
+    /**
+     * Test Multiply with binary numbers of different lengths.
+     */
+    @Test
+    public void testMultiplyDifferentLengths() {
+        Binary binary1 = new Binary("101010");
+        Binary binary2 = new Binary("111111111");
+
+        Binary resultMultiply = Binary.multiply(binary1, binary2);
+        assertEquals("Expected", "101001111010110", resultMultiply.getValue());
+    }
+
 }
